@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
@@ -31,7 +32,7 @@ public class privateRetirement extends Thread {
     public void calculatePrivateRetirement(int min, int max){
         double salary;
         Employees employee;
-        for(i=min; i<=max; i++){
+        for(i=min; i<max; i++){
             employee = employeeList.get(i);
             salary = employee.fullSalary;
             privateRetirement = salary*0.04;
@@ -42,10 +43,11 @@ public class privateRetirement extends Thread {
     }
 
     public void printPart3ofListInTxt(int min, int max){
-        for(i=min; i<=max; i++){
-            System.out.print("Thread 3");
-            System.out.println(employeeList.get(i));
-        }
+        FileManipulator fileManipulator = new FileManipulator(3);
+
+
+            fileManipulator.print_employee_list(employeeList, min, max);
+
     }
 
     public void run(){
@@ -53,6 +55,7 @@ public class privateRetirement extends Thread {
         try {
 
             //part 3
+            System.out.println(getName() + " part 3");
             minBoundary = listSize/2 + 1;
             maxBoundary = listSize - listSize/4;
             listPart3.acquire();
@@ -60,6 +63,7 @@ public class privateRetirement extends Thread {
             listPart3.release();
             
             //part 4
+            System.out.println(getName() + " part 4");
             minBoundary = listSize - listSize/4 + 1;
             maxBoundary = listSize;
             listPart4.acquire();
@@ -67,6 +71,7 @@ public class privateRetirement extends Thread {
             listPart4.release();
 
             //part 1
+            System.out.println(getName() + " part 1");
             minBoundary = 1;
             maxBoundary = listSize/4;
             listPart1.acquire();
@@ -74,6 +79,7 @@ public class privateRetirement extends Thread {
             listPart1.release();
 
             //part 2
+            System.out.println(getName() + " part 2");
             minBoundary = 1 + listSize/4;
             maxBoundary = listSize/2;
             listPart2.acquire();

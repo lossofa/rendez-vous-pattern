@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
@@ -33,7 +36,7 @@ public class incomeTax extends Thread {
 
         double salary;
         Employees employee;
-        for(i=min; i<=max; i++){
+        for(i=min; i<max; i++){
             employee = employeeList.get(i);
             salary = employee.fullSalary;
             incomeTax = salary*0.2;
@@ -43,18 +46,21 @@ public class incomeTax extends Thread {
         }
     }
 
-    public void printPart1ofListInTxt(int min, int max){
-        for(i=min; i<=max; i++){
-            System.out.print("Thread 1");
-            System.out.println(employeeList.get(i));
-        }
+    public void printPart1ofListInTxt(int min, int max) {
+      FileManipulator fileManipulator = new FileManipulator(1);
+
+
+            fileManipulator.print_employee_list(employeeList, min, max);
+
     }
+
 
     public void run(){
 
         try {
 
             //part 1
+            System.out.println(getName() + " part 1");
             minBoundary = 1;
             maxBoundary = listSize/4;
             listPart1.acquire();
@@ -62,6 +68,7 @@ public class incomeTax extends Thread {
             listPart1.release();
             
             //part 2
+            System.out.println(getName() + " part 2");
             minBoundary = 1 + listSize/4;
             maxBoundary = listSize/2;
             listPart2.acquire();
@@ -69,6 +76,7 @@ public class incomeTax extends Thread {
             listPart2.release();
 
             //part 3
+            System.out.println(getName() + " part 3");
             minBoundary = listSize/2 + 1;
             maxBoundary = listSize - listSize/4;
             listPart3.acquire();
@@ -76,6 +84,7 @@ public class incomeTax extends Thread {
             listPart3.release();
 
             //part 4
+            System.out.println(getName() + " part 4");
             minBoundary = listSize - listSize/4 + 1;
             maxBoundary = listSize;
             listPart4.acquire();

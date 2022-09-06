@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
@@ -31,7 +32,7 @@ public class healthInsurance extends Thread {
     public void calculateHealthInsurance(int min, int max){
         double salary;
         Employees employee;
-        for(i=min; i<=max; i++){
+        for(i=min; i<max; i++){
             employee = employeeList.get(i);
             salary = employee.fullSalary;
             healthInsurance = salary*0.04;
@@ -42,10 +43,10 @@ public class healthInsurance extends Thread {
     }
 
     public void printPart4ofListInTxt(int min, int max){
-        for(i=min; i<=max; i++){
-            System.out.print("Thread 4");
-            System.out.println(employeeList.get(i));
-        }
+        FileManipulator fileManipulator = new FileManipulator(4);
+
+            fileManipulator.print_employee_list(employeeList, min, max);
+
     }
 
     public void run(){
@@ -53,6 +54,7 @@ public class healthInsurance extends Thread {
         try {
 
             //part 4
+            System.out.println(getName() + " part 4");
             minBoundary = listSize - listSize/4 + 1;
             maxBoundary = listSize;
             listPart4.acquire();
@@ -60,6 +62,7 @@ public class healthInsurance extends Thread {
             listPart4.release();
 
             //part 1
+            System.out.println(getName() + " part 1");
             minBoundary = 1;
             maxBoundary = listSize/4;
             listPart1.acquire();
@@ -67,6 +70,7 @@ public class healthInsurance extends Thread {
             listPart1.release();
             
             //part 2
+            System.out.println(getName() + " part 2");
             minBoundary = 1 + listSize/4;
             maxBoundary = listSize/2;
             listPart2.acquire();
@@ -74,6 +78,7 @@ public class healthInsurance extends Thread {
             listPart2.release();
 
             //part 3
+            System.out.println(getName() + " part 3");
             minBoundary = listSize/2 + 1;
             maxBoundary = listSize - listSize/4;
             listPart3.acquire();
