@@ -5,7 +5,7 @@ import java.util.concurrent.Semaphore;
 
 public class Main {
     
-    static int n = 2;
+    static int n = 4;
     static int i;
     static int countOnBarrier = 0;
     public static void main(String[] args){
@@ -25,17 +25,17 @@ public class Main {
         Semaphore listPart3 = new Semaphore(1);
         Semaphore listPart4 = new Semaphore(1);
 
-        incomeTax incomeTax = new incomeTax(n*1000, employeeList, listPart1, listPart2, listPart3, listPart4, countMutex, barrier);
-        publicRetirement publicRetirement = new publicRetirement(n*1000, employeeList, listPart1, listPart2, listPart3, listPart4, countMutex, barrier);
-        privateRetirement privateRetirement = new privateRetirement(n*1000, employeeList, listPart1, listPart2, listPart3, listPart4, countMutex, barrier);
-        healthInsurance healthInsurance = new healthInsurance(n*1000, employeeList, listPart1, listPart2, listPart3, listPart4, countMutex, barrier);
+        incomeTax incomeTax = new incomeTax(n*2, employeeList, listPart1, listPart2, listPart3, listPart4, countMutex, barrier);
+        publicRetirement publicRetirement = new publicRetirement(n*2, employeeList, listPart1, listPart2, listPart3, listPart4, countMutex, barrier);
+        privateRetirement privateRetirement = new privateRetirement(n*2, employeeList, listPart1, listPart2, listPart3, listPart4, countMutex, barrier);
+        healthInsurance healthInsurance = new healthInsurance(n*2, employeeList, listPart1, listPart2, listPart3, listPart4, countMutex, barrier);
 
 
-        for (i = 1; i <= n*1000; i++){
+        for (i = 1; i <= n*2; i++){
             salary = salaryGenerator.nextDouble()*(maxSalary - minSalary) + minSalary;
-            Random r = new Random();
-            int id = r.nextInt(4000) + 1000;
-            Employees employee = new Employees(id, salary , 0.00, 0.00, 0.00, 0.00, 0.00, salary);
+            Employees employee = new Employees(
+                    i, salary , 0.00, 0.00, 0.00, 0.00, 0.00, salary
+            );
             employeeList.add(employee);
         }
 

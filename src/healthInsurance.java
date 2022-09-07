@@ -36,7 +36,8 @@ public class healthInsurance extends Thread {
             employee = employeeList.get(i);
             salary = employee.fullSalary;
             healthInsurance = salary*0.04;
-            employeeList.get(i).publicRetirementTaxDiscount = healthInsurance;
+            System.out.println(healthInsurance);
+            employeeList.get(i).healthInsurance = healthInsurance;
             employeeList.get(i).totalDiscounts = employee.totalDiscounts + healthInsurance;
             employeeList.get(i).liquidSalary = employee.liquidSalary - healthInsurance;
         }
@@ -45,7 +46,7 @@ public class healthInsurance extends Thread {
     public void printPart4ofListInTxt(int min, int max){
         FileManipulator fileManipulator = new FileManipulator(4);
 
-            fileManipulator.print_employee_list(employeeList, min, max);
+            fileManipulator.print_employee_list(employeeList,min,max);
 
     }
 
@@ -55,7 +56,7 @@ public class healthInsurance extends Thread {
 
             //part 4
             System.out.println(getName() + " part 4");
-            minBoundary = listSize - listSize/4 + 1;
+            minBoundary = listSize - listSize/4;
             maxBoundary = listSize;
             listPart4.acquire();
             calculateHealthInsurance(minBoundary, maxBoundary);
@@ -63,7 +64,7 @@ public class healthInsurance extends Thread {
 
             //part 1
             System.out.println(getName() + " part 1");
-            minBoundary = 1;
+            minBoundary = 0;
             maxBoundary = listSize/4;
             listPart1.acquire();
             calculateHealthInsurance(minBoundary, maxBoundary);
@@ -71,7 +72,7 @@ public class healthInsurance extends Thread {
             
             //part 2
             System.out.println(getName() + " part 2");
-            minBoundary = 1 + listSize/4;
+            minBoundary = listSize/4;
             maxBoundary = listSize/2;
             listPart2.acquire();
             calculateHealthInsurance(minBoundary, maxBoundary);
@@ -79,7 +80,7 @@ public class healthInsurance extends Thread {
 
             //part 3
             System.out.println(getName() + " part 3");
-            minBoundary = listSize/2 + 1;
+            minBoundary = listSize/2;
             maxBoundary = listSize - listSize/4;
             listPart3.acquire();
             calculateHealthInsurance(minBoundary, maxBoundary);
@@ -95,7 +96,7 @@ public class healthInsurance extends Thread {
             barrier.acquire();
             barrier.release();
 
-            minBoundary = listSize - listSize/4 + 1;
+            minBoundary = listSize - listSize/4;
             maxBoundary = listSize;
             printPart4ofListInTxt(minBoundary, maxBoundary);
 

@@ -36,7 +36,7 @@ public class privateRetirement extends Thread {
             employee = employeeList.get(i);
             salary = employee.fullSalary;
             privateRetirement = salary*0.04;
-            employeeList.get(i).publicRetirementTaxDiscount = privateRetirement;
+            employeeList.get(i).privateRetirementTaxDiscount = privateRetirement;
             employeeList.get(i).totalDiscounts = employee.totalDiscounts + privateRetirement;
             employeeList.get(i).liquidSalary = employee.liquidSalary - privateRetirement;
         }
@@ -56,7 +56,7 @@ public class privateRetirement extends Thread {
 
             //part 3
             System.out.println(getName() + " part 3");
-            minBoundary = listSize/2 + 1;
+            minBoundary = listSize/2;
             maxBoundary = listSize - listSize/4;
             listPart3.acquire();
             calculatePrivateRetirement(minBoundary, maxBoundary);
@@ -64,7 +64,7 @@ public class privateRetirement extends Thread {
             
             //part 4
             System.out.println(getName() + " part 4");
-            minBoundary = listSize - listSize/4 + 1;
+            minBoundary = listSize - listSize/4;
             maxBoundary = listSize;
             listPart4.acquire();
             calculatePrivateRetirement(minBoundary, maxBoundary);
@@ -72,7 +72,7 @@ public class privateRetirement extends Thread {
 
             //part 1
             System.out.println(getName() + " part 1");
-            minBoundary = 1;
+            minBoundary = 0;
             maxBoundary = listSize/4;
             listPart1.acquire();
             calculatePrivateRetirement(minBoundary, maxBoundary);
@@ -80,7 +80,7 @@ public class privateRetirement extends Thread {
 
             //part 2
             System.out.println(getName() + " part 2");
-            minBoundary = 1 + listSize/4;
+            minBoundary = listSize/4;
             maxBoundary = listSize/2;
             listPart2.acquire();
             calculatePrivateRetirement(minBoundary, maxBoundary);
@@ -96,7 +96,7 @@ public class privateRetirement extends Thread {
             barrier.acquire();
             barrier.release();
 
-            minBoundary = listSize/2 + 1;
+            minBoundary = listSize/2;
             maxBoundary = listSize - listSize/4;
             printPart3ofListInTxt(minBoundary, maxBoundary);
 

@@ -46,7 +46,7 @@ public class publicRetirement extends Thread {
         FileManipulator fileManipulator = new FileManipulator(2);
 
 
-            fileManipulator.print_employee_list(employeeList, min, max);
+            fileManipulator.print_employee_list(employeeList,min,max);
 
     }
 
@@ -56,7 +56,7 @@ public class publicRetirement extends Thread {
 
             //part 2
             System.out.println(getName() + " part 2");
-            minBoundary = 1 + listSize/4;
+            minBoundary = listSize/4;
             maxBoundary = listSize/2;
             listPart2.acquire();
             calculatePublicRetirement(minBoundary, maxBoundary);
@@ -64,7 +64,7 @@ public class publicRetirement extends Thread {
             
             //part 3
             System.out.println(getName() + " part 3");
-            minBoundary = listSize/2 + 1;
+            minBoundary = listSize/2;
             maxBoundary = listSize - listSize/4;
             listPart3.acquire();
             calculatePublicRetirement(minBoundary, maxBoundary);
@@ -72,7 +72,7 @@ public class publicRetirement extends Thread {
 
             //part 4
             System.out.println(getName() + " part 4");
-            minBoundary = listSize - listSize/4 + 1;
+            minBoundary = listSize - listSize/4;
             maxBoundary = listSize;
             listPart4.acquire();
             calculatePublicRetirement(minBoundary, maxBoundary);
@@ -80,7 +80,7 @@ public class publicRetirement extends Thread {
 
             //part 1
             System.out.println(getName()+ " part 1");
-            minBoundary = 1;
+            minBoundary = 0;
             maxBoundary = listSize/4;
             listPart1.acquire();
             calculatePublicRetirement(minBoundary, maxBoundary);
@@ -96,7 +96,7 @@ public class publicRetirement extends Thread {
             barrier.acquire();
             barrier.release();
 
-            minBoundary = 1 + listSize/4;
+            minBoundary = listSize/4;
             maxBoundary = listSize/2;
             printPart2ofListInTxt(minBoundary, maxBoundary);
 

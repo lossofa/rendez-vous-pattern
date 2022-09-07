@@ -23,7 +23,7 @@ public class FileManipulator {
         for (int i = 1; i <= 4; i++) {
             try {
                 PrintWriter out = new PrintWriter(create_filename(i));
-                out.println("");
+                out.print("");
                 out.close();
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
@@ -39,41 +39,23 @@ public class FileManipulator {
 //        } catch (IOException e) {
 //            throw new RuntimeException(e);
 //        }
-        for (int i=min; i<max;i++) {
+        for (int i=min; i<max; i++) {
 
             try {
 
                 FileWriter out = new FileWriter(filename, true);
                 Employees employee = employeeList.get(i);
-                if(fileId==1) {
                     out.write(
                             "\nemployee " + employee.employeeCode +
-                                    "\nliquid salary: " + employee.liquidSalary +
-                                    "\nstolen: " + employee.incomeTaxDiscount
+                                    "\nfull salary:  " + employee.fullSalary +
+                                    "\ntax: -" + employee.incomeTaxDiscount +
+                                    "\nhealth insurance: -" + employee.healthInsurance +
+                                    "\nINSS: -" + employee.publicRetirementTaxDiscount +
+                                    "\nprivate retirement tax: -" + employee.privateRetirementTaxDiscount +
+                                    "\ntotal discounts: -" + employee.totalDiscounts +
+                                    "\n----------------------------" +
+                            "\nliquid salary: " + employee.liquidSalary
                     );
-
-                }
-                if(fileId==2){
-                    out.write(
-                            "\nemployee " + employee.employeeCode +
-                                    "\nliquid salary: " + employee.liquidSalary +
-                                    "\npublic retirement: " + employee.publicRetirementTaxDiscount
-                    );
-                }
-                if(fileId==3){
-                    out.write(
-                            "\nemployee " + employee.employeeCode +
-                                    "\nliquid salary: " + employee.liquidSalary +
-                                    "\nprivate retirement: " + employee.privateRetirementTaxDiscount
-                    );
-                }
-                if(fileId==4){
-                    out.write(
-                            "\nemployee " + employee.employeeCode +
-                                    "\nliquid salary: " + employee.liquidSalary +
-                                    "\nhealth insurance: " + employee.healthInsurance
-                    );
-                }
 
                 out.write("\n================================");
                 out.close();
